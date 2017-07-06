@@ -1,11 +1,8 @@
-/The Kickstarter Rewards Delivery System program!
 
-
+//The Kickstarter Rewards Delivery System program!
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-
-
 
  struct Backer
  {
@@ -13,8 +10,7 @@ int backer_ID;
 char backer_name[100];//delcare the backer struct
 char email[25];
 char country[25];
-};
-
+};  
 
  struct Reward
  {
@@ -56,8 +52,7 @@ int menuItem;
 	   LoadData();
 	while ((menuItem = displayMenu()) != 9) {
 		
-   
-		 switch (menuItem)//Developing a switch case for my menu items. Each case will call one of my functions.
+		switch (menuItem)//Developing a switch case for my menu items. Each case will call one of my functions.
 		 {
 	 case 1:
 			 new_backer();
@@ -66,7 +61,7 @@ int menuItem;
 		    new_reward();
 			break;
 	 case 3: backers_info();
-		 break;
+		    break;
 	 case 4: 
 	        sort_backers();
 			break;
@@ -108,15 +103,12 @@ int menuItem;
 	 scanf("%d",&option);
 
 	 return option;
-
-
  }
  //Function Load data. Checks to see if the two files exist,If not create the new files for writing. Unfortunatley due to time I never
  //got around to the dynamic memory allocation,I had hoped to return to it at a later date. Using fscan to scan through the two files and read my data
  //into my two struct arrays.
  void LoadData()
  {
-	
 	FILE * BackersPtr;
     FILE * RewardsPtr;
 	char backerFilename[50]= "Backers.dat";
@@ -130,8 +122,6 @@ int menuItem;
 	int num_drones;
 	int priority;
 	char dispatch_date[20];
-
-	
 
 	BackersPtr=fopen(backerFilename,"r");
 	if (!BackersPtr){
@@ -177,9 +167,8 @@ int menuItem;
 
 	 printf("Add ID number: ");
 		 scanf("%d",&ID);
-
-
-	 printf("Input name: ");
+    
+     printf("Input name: ");
 	 scanf("%s",name);
 
 	 printf("Input email: ");
@@ -215,8 +204,6 @@ int menuItem;
 	 printf("Add reward number: ");
 	 scanf("%d",&reward_no);
 
-	 
-
 	 printf("Add number of drones: ");
       scanf("%d",&num_drones);
 
@@ -242,11 +229,9 @@ int menuItem;
 	 int i,j,backer_id,reward_number,num_drones,priority;
 	 char backer_name[100],email[100],country[100],dispatch_date[100];
 	
-
-	
-printf("View all backers information\n");
- printf("%s %12s %12s %20s %12s %10s %11s %10s", "Backer_ID","Name","Email","Country","Number","Drones","Priority"," Date\n");
-printf("*********************************************************************************************************************\n");
+	 printf("View all backers information\n");
+     printf("%s %12s %12s %20s %12s %10s %11s %10s", "Backer_ID","Name","Email","Country","Number","Drones","Priority"," Date\n");
+     printf("*********************************************************************************************************************\n");
 
 
 for (i=0;i<numbacker;i++)
@@ -255,16 +240,13 @@ for (j=0;j<numreward;j++)
 	if (tempBacker[i].backer_ID == tempReward[j].backer_ID)
 	printf("%d %20s %20s %10s %10d %10d %11d %15s \n",tempBacker[i].backer_ID,tempBacker[i].backer_name,tempBacker[i].email,
 	tempBacker[i].country,tempReward[j].reward_number,tempReward[j].num_drones,tempReward[j].priority,tempReward[j].dispatch_date);
-
- 
  }
  //Sort the backers by name using Bubblesort,I made a copy of the original array using memcpy so as not to change the data in the backers file.
  //This uses a mixture of bubblesort for strings and bubblesort for integers as we have covered previously in the course. As well as sorting the backer by
  //name we also need to print the backer ID and country. So we need to swap these over at each pass off the Bubblesort.
  void sort_backers(){
 
-
-	FILE * File3Ptr; 
+	 FILE * File3Ptr; 
 	 int    i=0, j=0,tempID;
 	 char  temp[512]={0},tempCountry[512]={0};
 	 memcpy(&tempBacker2,&tempBacker,sizeof(tempBacker));
@@ -296,10 +278,8 @@ for (j=0;j<numreward;j++)
 		 printf("***************************************\n");
 		 for (j=0; j<numbacker; j++){
 			 
-			
-		 printf("%s \t \t| %d \t \t|  %s\n",tempBacker2[j].backer_name,tempBacker2[j].backer_ID,tempBacker2[j].country);
-		
-	  }
+			 printf("%s \t \t| %d \t \t|  %s\n",tempBacker2[j].backer_name,tempBacker2[j].backer_ID,tempBacker2[j].country);
+		 }
 
  if ((File3Ptr=fopen("sorted.dat","w"))==NULL){//saving the data to the sorted.dat file
 		printf("File could not be opened\n");
@@ -361,18 +341,13 @@ for (i=0; i<numreward; i++){
  }
  }
  }
- 
- 
- printf("Rewards sorted by country : \n");
+  printf("Rewards sorted by country : \n");
  printf("Country  | Reward Number | Number of drones\n");
  printf("*********************************************\n");
  for (i=0;i<numbacker;i++)
 for (i=0;i<numreward;i++)
 
 	 printf("%s  %10s %10s",tempBacker3[i].country,tempReward3[i].reward_number,tempReward3[i].num_drones);
-
-
-
  }
  void sort_priority(){
 	 FILE * File4Ptr;
@@ -385,8 +360,7 @@ memcpy(&tempReward2,&tempReward,sizeof(tempReward));
 for (i=0; i<numreward; i++){
 for (j =0; j<numreward-1; j++){
 
-
-if	(tempReward2[j].priority>tempReward2[j+1].priority){
+	if	(tempReward2[j].priority>tempReward2[j+1].priority){
 
 	temp       = tempReward2[j].priority;
     swapID     = tempReward2[j].backer_ID;
@@ -422,14 +396,12 @@ printf("%d \t  %d \t \t %d \t \t %d \t %.2f\n",tempReward2[j].priority,tempRewar
  }
  printf("The sorted data is stored in priority.dat\n");
 
-
-	 for (i=0;i<numreward;i++)
+   for (i=0;i<numreward;i++)
 
 fprintf(File4Ptr,"%d %d %d %d %.2f\n",tempReward2[i].priority,tempReward2[i].backer_ID,tempReward2[i].num_drones,tempReward2[i].reward_number,
 		tempReward2[i].price);
  
  }
-                 
  void total_donations()
  {
 int i,j, drones=0;
@@ -448,10 +420,6 @@ for (j=0;j<numreward;j++){
 printf("The total number of drones to be delivered is %d\n",drones);
 printf("\nThe average cost of a drone is $%.2f\n",(float) cost = total/drones);
  }
-
-
-
-
 
  void save_data()//Open the two files for writing and save the data when the exit menu option is chosen.
  {
@@ -475,13 +443,8 @@ printf("\nThe average cost of a drone is $%.2f\n",(float) cost = total/drones);
 		  for (i=0;i<numreward;++i)
 		fprintf(RewardPtr,"%d %d %.2f %d %d %s\n",tempReward[i].backer_ID,tempReward[i].reward_number,tempReward[i].price,tempReward[i].num_drones,tempReward[i].priority,tempReward[i].dispatch_date);
 
-
 		  fclose(BackerPtr);
 		  fclose(RewardPtr);
 
 		  printf("Saving Data to file\n");
 	  }
-
-
-
- 
